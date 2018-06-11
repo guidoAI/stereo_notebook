@@ -94,6 +94,15 @@ def calculate_disparities(imgL, imgR, window_size=7, min_disp=0, num_disp=16):
 
 [imgL, imgR] = read_stereo_image();
 
+plt.figure();
+plt.subplot(121)
+plt.imshow(imgL);
+plt.title('Left');
+
+plt.subplot(122)
+plt.imshow(imgR);
+plt.title('Right');
+
 #D = simple_stereo(imgL, imgR);
 #plt.figure();
 #plt.imshow(D, cmap='hot');
@@ -112,9 +121,9 @@ def calculate_disparities(imgL, imgR, window_size=7, min_disp=0, num_disp=16):
 #plt.imshow(D, cmap='hot');
 #plt.colorbar();
 #plt.draw()
-
-D = calculate_disparities(imgL, imgR, window_size=7, min_disp=0, num_disp=16)
-plt.figure();
-plt.imshow(D, cmap='hot');
-plt.colorbar();
-plt.draw()
+#
+#D = calculate_disparities(imgL, imgR, window_size=7, min_disp=0, num_disp=16)
+#plt.figure();
+#plt.imshow(D, cmap='hot');
+#plt.colorbar();
+#plt.draw()
