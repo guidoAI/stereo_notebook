@@ -92,16 +92,32 @@ def calculate_disparities(imgL, imgR, window_size=7, min_disp=0, num_disp=16):
     disp = stereo.compute(imgL, imgR).astype(np.float32) / 16.0;
     return disp; 
 
-[imgL, imgR] = read_stereo_image();
+def plot_relation_disparity_depth(f = 300, T_X = 0.10, max_disp = 64):
+    """ Focal length f is in pixels, T_X is in meters.
+    """
+    
+    disparities = np.arange(1, max_disp+1, 1);
+    depths = np.zeros(max_disp);
+    for disp in disparities:
+        depths[disp-1] = f * (T_X / disp);
+    
+    plt.figure();
+    plt.plot(disparities, depths, 'o');
+    plt.xlabel('Disparity [px]')
+    plt.ylabel('Depth Z [m]')
+    
+plot_relation_disparity_depth(f = 140, T_X = 0.06, max_disp = 32)
 
-plt.figure();
-plt.subplot(121)
-plt.imshow(imgL);
-plt.title('Left');
-
-plt.subplot(122)
-plt.imshow(imgR);
-plt.title('Right');
+#[imgL, imgR] = read_stereo_image();
+#
+#plt.figure();
+#plt.subplot(121)
+#plt.imshow(imgL);
+#plt.title('Left');
+#
+#plt.subplot(122)
+#plt.imshow(imgR);
+#plt.title('Right');
 
 #D = simple_stereo(imgL, imgR);
 #plt.figure();
